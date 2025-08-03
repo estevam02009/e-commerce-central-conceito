@@ -43,43 +43,4 @@ export const useCart = () => {
             )
         )
     }   
-
-    const updateQuantity = (productId: string, newQuantity: number, selectedSize?: string, selectedColor?: string) => {
-        if (newQuantity <= 0) {
-            removeFromCart(productId, selectedSize, selectedColor)
-            return
-        }
-
-        setCartItems(prevItems => 
-            prevItems.map(item => 
-                item.product.id === productId && 
-                item.selectedSize === selectedSize && 
-                item.selectedColor === selectedColor 
-                ? { ...item, quantity: newQuantity } 
-                : item
-            )
-        )
-    }
-
-    const clearCart = () => {
-        setCartItems([])
-    }
-
-    const getTotalPrice = () => {
-        return cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0)
-    }
-
-    const getTotalItems = () => {
-        return cartItems.reduce((total, item) => total + item.quantity, 0)
-    }
-
-    return {
-        cartItems,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        clearCart,
-        getTotalPrice,
-        getTotalItems,
-    }
 }
